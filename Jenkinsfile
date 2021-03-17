@@ -46,14 +46,14 @@ pipeline {
              
             steps 
 			{
-                sh "docker run -d -p 8003:8080 srinivasrayudu/loginapp"
+                sh "docker run -d -p 8003:8080 srinivasrayudu/loginapp:$BUILD_NUMBER"
  
             }
         }
  stage('Run Docker container on remote hosts') {
              
             steps {
-                sh "docker -H ssh://jenkins@3.223.135.241 run -d -p 8003:8080 srinivasrayudu/loginapp"
+                sh "docker -H ssh://jenkins@3.223.135.241 run -d -p 8003:8080 srinivasrayudu/loginapp:$BUILD_NUMBER"
  
             }
         }
