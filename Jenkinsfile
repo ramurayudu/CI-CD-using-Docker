@@ -46,7 +46,7 @@ pipeline {
              
             steps 
 			{
-                sh "docker run -d -p 8003:8080 srinivasrayudu/loginapp:$BUILD_NUMBER"
+                sh "docker run -d -p 9000:8080 srinivasrayudu/loginapp:$BUILD_NUMBER"
  
             }
         }
