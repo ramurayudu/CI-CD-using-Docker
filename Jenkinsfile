@@ -34,8 +34,8 @@ pipeline {
   stage('Publish image to Docker Hub') {
           
             steps {
-        withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
-          sh  'sudo docker push srinivasrayudu/samplewebapp:latest'
+        withDockerRegistry([ credentialsId: "dockerHubCredentials", url: "" ]) {
+          sh  'docker push srinivasrayudu/loginapp:$BUILD_NUMBER'
         //  sh  'docker push nikhilnidhi/samplewebapp:$BUILD_NUMBER' 
         }
                   
@@ -46,14 +46,14 @@ pipeline {
              
             steps 
 			{
-                sh "docker run -d -p 8003:8080 srinivasrayudu/samplewebapp"
+                sh "docker run -d -p 8003:8080 srinivasrayudu/loginapp"
  
             }
         }
  stage('Run Docker container on remote hosts') {
              
             steps {
-                sh "docker -H ssh://jenkins@3.223.135.241 run -d -p 8003:8080 srinivasrayudu/samplewebapp"
+                sh "docker -H ssh://jenkins@3.223.135.241 run -d -p 8003:8080 srinivasrayudu/loginapp"
  
             }
         }
